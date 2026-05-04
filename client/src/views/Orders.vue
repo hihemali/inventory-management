@@ -27,9 +27,53 @@
         </div>
       </div>
 
+      <!-- Submitted restocking orders -->
+      <div v-if="submittedOrders.length > 0" class="card submitted-section">
+        <div class="card-header">
+          <h3 class="card-title">{{ t('restocking.submittedOrders') }} ({{ submittedOrders.length }})</h3>
+        </div>
+        <table class="orders-table">
+          <thead>
+            <tr>
+              <th class="col-order-number">{{ t('orders.table.orderNumber') }}</th>
+              <th class="col-customer">{{ t('orders.table.customer') }}</th>
+              <th class="col-items">{{ t('orders.table.items') }}</th>
+              <th class="col-status">{{ t('orders.table.status') }}</th>
+              <th class="col-date">{{ t('orders.table.orderDate') }}</th>
+              <th class="col-date">{{ t('orders.table.expectedDelivery') }}</th>
+              <th class="col-date">{{ t('restocking.leadTime') }}</th>
+              <th class="col-value">{{ t('orders.table.totalValue') }}</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr v-for="order in submittedOrders" :key="order.id">
+              <td><strong>{{ order.order_number }}</strong></td>
+              <td>{{ order.customer }}</td>
+              <td>
+                <details class="items-details">
+                  <summary>{{ order.items.length }} {{ t('common.items') }}</summary>
+                  <div class="items-dropdown">
+                    <div v-for="item in order.items" :key="item.sku" class="item-row">
+                      <span>{{ item.name }}</span>
+                      <span class="item-meta">{{ t('orders.quantity') }}: {{ item.quantity }} · ${{ item.unit_price }}</span>
+                      <span class="item-lead" v-if="item.lead_time_days">{{ item.lead_time_days }}d lead</span>
+                    </div>
+                  </div>
+                </details>
+              </td>
+              <td><span class="status-badge warning">Submitted</span></td>
+              <td>{{ formatDate(order.order_date) }}</td>
+              <td>{{ formatDate(order.expected_delivery) }}</td>
+              <td>{{ getLeadTimeDays(order) }} {{ t('restocking.days') }}</td>
+              <td><strong>{{ currencySymbol }}{{ order.total_value.toLocaleString() }}</strong></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
       <div class="card">
         <div class="card-header">
-          <h3 class="card-title">{{ t('orders.allOrders') }} ({{ orders.length }})</h3>
+          <h3 class="card-title">{{ t('orders.allOrders') }} ({{ displayOrders.length }})</h3>
         </div>
         <div class="table-container">
           <table class="orders-table">
@@ -45,7 +89,7 @@
               </tr>
             </thead>
             <tbody>
-              <tr v-for="order in orders" :key="order.id">
+              <tr v-for="order in displayOrders" :key="order.id">
                 <td class="col-order-number"><strong>{{ order.order_number }}</strong></td>
                 <td class="col-customer">{{ translateCustomerName(order.customer) }}</td>
                 <td class="col-items">
@@ -95,6 +139,16 @@ export default {
     const loading = ref(true)
     const error = ref(null)
     const orders = ref([])
+
+    // Submitted restocking orders shown in their own section
+    const submittedOrders = computed(() =>
+      orders.value.filter(o => o.status === 'Submitted')
+    )
+
+    // All non-submitted orders for the main table
+    const displayOrders = computed(() =>
+      orders.value.filter(o => o.status !== 'Submitted')
+    )
 
     // Use shared filters
     const {
@@ -153,6 +207,14 @@ export default {
       })
     }
 
+    // Compute lead time in days from order_date to expected_delivery
+    const getLeadTimeDays = (order) => {
+      const start = new Date(order.order_date)
+      const end = new Date(order.expected_delivery)
+      if (isNaN(start) || isNaN(end)) return '—'
+      return Math.round((end - start) / (1000 * 60 * 60 * 24))
+    }
+
     onMounted(loadOrders)
 
     return {
@@ -160,9 +222,12 @@ export default {
       loading,
       error,
       orders,
+      submittedOrders,
+      displayOrders,
       getOrdersByStatus,
       getOrderStatusClass,
       formatDate,
+      getLeadTimeDays,
       currencySymbol,
       translateProductName,
       translateCustomerName
@@ -275,5 +340,16 @@ export default {
 .item-meta {
   font-size: 0.813rem;
   color: #64748b;
+}
+
+.submitted-section {
+  border-left: 3px solid #f59e0b;
+}
+
+.item-lead {
+  font-size: 11px;
+  color: #f59e0b;
+  font-weight: 600;
+  margin-left: 6px;
 }
 </style>
