@@ -249,8 +249,8 @@ const formatDate = (dateString) => {
 }
 
 .priority-badge.low {
-  background: #dbeafe;
-  color: #1e40af;
+  background: #ccfbf1;
+  color: #115e59;
 }
 
 .shortage-summary {
@@ -328,7 +328,7 @@ const formatDate = (dateString) => {
 .info-value.order-id,
 .info-value.sku {
   font-family: 'Monaco', 'Courier New', monospace;
-  color: #2563eb;
+  color: #0d9488;
 }
 
 .modal-footer {

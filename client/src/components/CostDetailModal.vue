@@ -226,7 +226,7 @@ const close = () => {
 }
 
 .summary-card.total {
-  background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);
+  background: linear-gradient(135deg, #0d9488 0%, #0f766e 100%);
   color: white;
 }
 
@@ -257,8 +257,8 @@ const close = () => {
 }
 
 .cost-item.procurement {
-  border-color: #93c5fd;
-  background: #eff6ff;
+  border-color: #99f6e4;
+  background: #f0fdfa;
 }
 
 .cost-item.operational {
@@ -294,7 +294,7 @@ const close = () => {
 }
 
 .cost-item.procurement .cost-icon {
-  background: #3b82f6;
+  background: #0d9488;
   color: white;
 }
 

@@ -181,7 +181,7 @@ export default {
 
       // If change is within ±2%, consider it stable and show blue
       if (changePercent <= 2) {
-        return '#3b82f6' // Blue for stable
+        return '#0d9488' // Teal for stable
       }
 
       if (change > 0) return '#10b981' // Green for increasing
@@ -248,7 +248,7 @@ export default {
 }
 
 .stable-card {
-  border-left: 4px solid #3b82f6;
+  border-left: 4px solid #0d9488;
 }
 
 .decreasing-card {
@@ -282,8 +282,8 @@ export default {
 }
 
 .stable-card .trend-icon {
-  background: #dbeafe;
-  color: #2563eb;
+  background: #ccfbf1;
+  color: #0d9488;
 }
 
 .decreasing-card .trend-icon {
@@ -348,7 +348,7 @@ export default {
 }
 
 .stable-card .item-change {
-  color: #3b82f6;
+  color: #0d9488;
 }
 
 .decreasing-card .item-change {

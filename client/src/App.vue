@@ -252,8 +252,8 @@ body {
 }
 
 .nav-tabs a.active {
-  color: #2563eb;
-  background: #eff6ff;
+  color: #0d9488;
+  background: #f0fdfa;
 }
 
 .nav-tabs a.active::after {
@@ -263,7 +263,7 @@ body {
   left: 0;
   right: 0;
   height: 2px;
-  background: #2563eb;
+  background: #0d9488;
 }
 
 .main-content {
@@ -340,7 +340,7 @@ body {
 }
 
 .stat-card.info .stat-value {
-  color: #2563eb;
+  color: #0d9488;
 }
 
 .card {
@@ -433,8 +433,8 @@ tbody tr:hover {
 }
 
 .badge.info {
-  background: #dbeafe;
-  color: #1e40af;
+  background: #ccfbf1;
+  color: #115e59;
 }
 
 .badge.increasing {
@@ -448,8 +448,8 @@ tbody tr:hover {
 }
 
 .badge.stable {
-  background: #e0e7ff;
-  color: #3730a3;
+  background: #ccfbf1;
+  color: #0f766e;
 }
 
 .badge.high {
@@ -463,8 +463,8 @@ tbody tr:hover {
 }
 
 .badge.low {
-  background: #dbeafe;
-  color: #1e40af;
+  background: #ccfbf1;
+  color: #115e59;
 }
 
 .loading {

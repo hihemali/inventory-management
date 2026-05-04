@@ -304,12 +304,14 @@ import { useI18n } from '../composables/useI18n'
 import { formatCurrency } from '../utils/currency'
 import ProductDetailModal from '../components/ProductDetailModal.vue'
 import BacklogDetailModal from '../components/BacklogDetailModal.vue'
+import PurchaseOrderModal from '../components/PurchaseOrderModal.vue'
 
 export default {
   name: 'Dashboard',
   components: {
     ProductDetailModal,
     BacklogDetailModal,
+    PurchaseOrderModal,
   },
   setup() {
     const { t, currentCurrency, translateProductName, translateWarehouse } = useI18n()
@@ -801,7 +803,7 @@ export default {
 
 .kpi-progress {
   height: 100%;
-  background: #3b82f6;
+  background: #0d9488;
   border-radius: 3px;
   transition: width 0.6s ease;
 }
@@ -1044,11 +1046,11 @@ export default {
   width: 100%;
   max-width: 60px;
   min-height: 8px;
-  background: #3b82f6;
+  background: #0d9488;
   border-radius: 6px 6px 0 0;
   transition: all 0.3s ease;
   cursor: pointer;
-  box-shadow: 0 2px 4px rgba(59, 130, 246, 0.3);
+  box-shadow: 0 2px 4px rgba(13, 148, 136, 0.3);
 }
 
 .line-bar.empty-bar {
@@ -1058,7 +1060,7 @@ export default {
 }
 
 .line-bar:hover {
-  background: #2563eb;
+  background: #0f766e;
   transform: scaleY(1.05);
 }
 
@@ -1109,7 +1111,7 @@ export default {
 }
 
 .clickable-row:hover {
-  background: #eff6ff !important;
+  background: #f0fdfa !important;
 }
 
 /* Tasks Card Styles */
@@ -1248,14 +1250,14 @@ export default {
 }
 
 .po-button.create {
-  background: #3b82f6;
+  background: #0d9488;
   color: white;
 }
 
 .po-button.create:hover {
-  background: #2563eb;
+  background: #0f766e;
   transform: translateY(-1px);
-  box-shadow: 0 2px 4px rgba(59, 130, 246, 0.3);
+  box-shadow: 0 2px 4px rgba(13, 148, 136, 0.3);
 }
 
 .po-button.view {

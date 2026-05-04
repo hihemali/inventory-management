@@ -460,7 +460,7 @@ label {
 }
 
 .task-item.priority-low {
-  border-left: 4px solid #2563eb;
+  border-left: 4px solid #0d9488;
 }
 
 .task-item.completed {
@@ -554,8 +554,8 @@ label {
 }
 
 .priority-badge.low {
-  background: #dbeafe;
-  color: #1e40af;
+  background: #ccfbf1;
+  color: #115e59;
 }
 
 .task-due-date {
@@ -589,8 +589,8 @@ label {
 }
 
 .status-badge.upcoming {
-  background: #dbeafe;
-  color: #1e40af;
+  background: #ccfbf1;
+  color: #115e59;
 }
 
 .status-badge.completed {

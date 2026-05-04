@@ -283,9 +283,9 @@ export default {
 
 .search-input:focus {
   outline: none;
-  border-color: #3b82f6;
+  border-color: #0d9488;
   background: white;
-  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+  box-shadow: 0 0 0 3px rgba(13, 148, 136, 0.1);
 }
 
 .search-input::placeholder {
@@ -334,6 +334,6 @@ export default {
 }
 
 .clickable-row:hover {
-  background: #eff6ff !important;
+  background: #f0fdfa !important;
 }
 </style>

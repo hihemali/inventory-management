@@ -210,7 +210,7 @@ export default {
 
 .items-summary {
   cursor: pointer;
-  color: #3b82f6;
+  color: #0d9488;
   font-weight: 500;
   list-style: none;
   user-select: none;
@@ -234,7 +234,7 @@ export default {
 }
 
 .items-summary:hover {
-  color: #2563eb;
+  color: #0f766e;
   text-decoration: underline;
 }
 

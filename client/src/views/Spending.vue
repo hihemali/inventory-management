@@ -559,7 +559,7 @@ export default {
 }
 
 .profit-card {
-  border-left: 4px solid #3b82f6;
+  border-left: 4px solid #0d9488;
 }
 
 .stat-meta {
@@ -723,7 +723,7 @@ export default {
 
 .category-amount {
   font-weight: 700;
-  color: #2563eb;
+  color: #0d9488;
   font-size: 1.125rem;
 }
 
@@ -737,7 +737,7 @@ export default {
 
 .category-bar {
   height: 100%;
-  background: linear-gradient(90deg, #3b82f6 0%, #2563eb 100%);
+  background: linear-gradient(90deg, #0d9488 0%, #0f766e 100%);
   border-radius: 4px;
   transition: width 0.6s ease;
 }
@@ -817,7 +817,7 @@ export default {
 }
 
 .transactions-table tbody tr.clickable-row:hover {
-  background: #eff6ff;
+  background: #f0fdfa;
 }
 
 .transaction-id {

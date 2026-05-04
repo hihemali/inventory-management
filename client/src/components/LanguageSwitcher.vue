@@ -168,8 +168,8 @@ const selectLanguage = (locale) => {
 }
 
 .dropdown-item.active {
-  background: #eff6ff;
-  color: #2563eb;
+  background: #f0fdfa;
+  color: #0d9488;
 }
 
 .language-name {
@@ -177,7 +177,7 @@ const selectLanguage = (locale) => {
 }
 
 .check-icon {
-  color: #2563eb;
+  color: #0d9488;
   flex-shrink: 0;
 }
 </style>

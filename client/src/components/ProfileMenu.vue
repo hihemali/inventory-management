@@ -142,7 +142,7 @@ const handleLogout = () => {
   width: 32px;
   height: 32px;
   border-radius: 50%;
-  background: linear-gradient(135deg, #2563eb 0%, #1e40af 100%);
+  background: linear-gradient(135deg, #0d9488 0%, #115e59 100%);
   color: white;
   display: flex;
   align-items: center;
@@ -192,7 +192,7 @@ const handleLogout = () => {
   width: 48px;
   height: 48px;
   border-radius: 50%;
-  background: linear-gradient(135deg, #2563eb 0%, #1e40af 100%);
+  background: linear-gradient(135deg, #0d9488 0%, #115e59 100%);
   color: white;
   display: flex;
   align-items: center;
@@ -269,7 +269,7 @@ const handleLogout = () => {
 
 .task-badge {
   margin-left: auto;
-  background: #2563eb;
+  background: #0d9488;
   color: white;
   font-size: 0.75rem;
   font-weight: 600;

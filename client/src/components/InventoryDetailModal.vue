@@ -329,8 +329,8 @@ const getSummaryCardClass = () => {
 }
 
 .summary-card.primary {
-  border-color: #bfdbfe;
-  background: #eff6ff;
+  border-color: #99f6e4;
+  background: #f0fdfa;
 }
 
 .summary-card.success-card {
@@ -397,7 +397,7 @@ const getSummaryCardClass = () => {
 
 .info-value.total-value {
   font-size: 1.125rem;
-  color: #2563eb;
+  color: #0d9488;
   font-weight: 700;
 }
 
