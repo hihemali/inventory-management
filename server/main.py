@@ -120,6 +120,21 @@ class CreatePurchaseOrderRequest(BaseModel):
     expected_delivery_date: str
     notes: Optional[str] = None
 
+class CreateOrderRequest(BaseModel):
+    customer: str
+    items: List[dict]  # each item: {sku, name, quantity, unit_price, lead_time_days}
+    warehouse: Optional[str] = None
+    category: Optional[str] = None
+
+class Task(BaseModel):
+    id: str
+    title: str
+    status: str  # 'pending' | 'completed'
+    created_at: str
+
+class CreateTaskRequest(BaseModel):
+    title: str
+
 # API endpoints
 @app.get("/")
 def root():
@@ -140,6 +155,31 @@ def get_inventory_item(item_id: str):
     if not item:
         raise HTTPException(status_code=404, detail="Item not found")
     return item
+
+@app.post("/api/orders", response_model=Order)
+def create_order(request: CreateOrderRequest):
+    """Create a new restocking order (in-memory only, not persisted)"""
+    import uuid
+    from datetime import datetime, timedelta
+
+    # Use the longest lead time across all items to set expected delivery
+    max_lead = max((i.get('lead_time_days', 14) for i in request.items), default=14)
+    now = datetime.utcnow()
+    new_order = {
+        "id": str(uuid.uuid4()),
+        "order_number": f"RST-{now.year}-{str(len(orders) + 1).zfill(4)}",
+        "customer": request.customer,
+        "items": request.items,
+        "status": "Submitted",
+        "warehouse": request.warehouse,
+        "category": request.category,
+        "order_date": now.isoformat(),
+        "expected_delivery": (now + timedelta(days=max_lead)).isoformat(),
+        "total_value": round(sum(i["quantity"] * i["unit_price"] for i in request.items), 2),
+        "actual_delivery": None,
+    }
+    orders.append(new_order)
+    return new_order
 
 @app.get("/api/orders", response_model=List[Order])
 def get_orders(
@@ -303,6 +343,49 @@ def get_monthly_trends():
     result = list(months.values())
     result.sort(key=lambda x: x['month'])
     return result
+
+# In-memory task storage (resets on server restart, consistent with app's mock-data approach)
+_tasks: List[dict] = []
+_task_counter = 1
+
+@app.get("/api/tasks", response_model=List[Task])
+def get_tasks():
+    """Return all tasks"""
+    return _tasks
+
+@app.post("/api/tasks", response_model=Task)
+def create_task(request: CreateTaskRequest):
+    """Create a new task"""
+    global _task_counter
+    from datetime import datetime
+    task = {
+        "id": f"task-{_task_counter}",
+        "title": request.title,
+        "status": "pending",
+        "created_at": datetime.utcnow().isoformat()
+    }
+    _task_counter += 1
+    _tasks.append(task)
+    return task
+
+@app.delete("/api/tasks/{task_id}")
+def delete_task(task_id: str):
+    """Delete a task by id"""
+    global _tasks
+    before = len(_tasks)
+    _tasks = [t for t in _tasks if t["id"] != task_id]
+    if len(_tasks) == before:
+        raise HTTPException(status_code=404, detail="Task not found")
+    return {"ok": True}
+
+@app.patch("/api/tasks/{task_id}", response_model=Task)
+def toggle_task(task_id: str):
+    """Toggle a task between pending and completed"""
+    for task in _tasks:
+        if task["id"] == task_id:
+            task["status"] = "completed" if task["status"] == "pending" else "pending"
+            return task
+    raise HTTPException(status_code=404, detail="Task not found")
 
 if __name__ == "__main__":
     import uvicorn
